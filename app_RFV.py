@@ -89,7 +89,7 @@ def main():
 
     # Verifica se há conteúdo carregado na aplicação
     if (data_file_1 is not None):
-        df_compras = pd.read_csv(data_file_1, infer_datetime_format=True, parse_dates=['DiaCompra'])
+        df_compras = pd.read_excel(data_file_1, infer_datetime_format=True, parse_dates=['DiaCompra'])
 
         st.write('## Recência (R)')
 
@@ -149,13 +149,13 @@ def main():
         st.write(df_RFV['RFV_Score'].value_counts())
 
         st.write('#### Clientes com menor recência, maior frequência e maior valor gasto')
-        st.write(df_RFV[df_RFV['RFV_Score']=='AAA'].sort_values('Valor', ascending=False).head(10))
+        st.write(df_RFV[df_RFV['RFV_Score']=='AAA']).sort_values('Valor', ascending=False).head(10)
 
         st.write('### Ações de marketing/CRM')
 
         dict_acoes = {'AAA': 'Enviar cupons de desconto, Pedir para indicar nosso produto pra algum amigo, Ao lançar um novo produto enviar amostras grátis pra esses.',
         'DDD': 'Churn! clientes que gastaram bem pouco e fizeram poucas compras, fazer nada',
-        'DAA': 'Churn! clientes que gastaram bastante e fizeram muitas compras, enviar cupons de desconto para tentar recuperar',
+        'BAA': 'Churn! clientes que gastaram bastante e fizeram muitas compras, enviar cupons de desconto para tentar recuperar',
         'CAA': 'Churn! clientes que gastaram bastante e fizeram muitas compras, enviar cupons de desconto para tentar recuperar'
         }
 
@@ -171,6 +171,8 @@ def main():
 
         st.write('Quantidade de clientes por tipo de ação')
         st.write(df_RFV['acoes de marketing/crm'].value_counts(dropna=False))
+
+        
 
 if __name__ == '__main__':
 	main()
